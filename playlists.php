@@ -36,6 +36,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>Options</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +48,7 @@
                     if ($playlists->num_rows > 0) {
                         while($row = $playlists->fetch_assoc()) {
                             echo "<tr><td>";
-                            echo $row["name"]."</td><td>".$row["description"];
+                            echo $row["name"]."</td><td>".$row["description"]."</td><td><a href='viewPlaylist.php?p_id=".$row["id"]."'>View Playlist</a>";
                             echo "</td></tr>";
                         }
                     }
