@@ -3,6 +3,12 @@
         header("Location: signin.php"); 
     }
     include_once 'connection.php';
+
+    $user_q = "SELECT id, is_admin FROM `music`.`web_user` where `username`='".$_SESSION['username']."'";
+    $results = mysqli_query($conn,$user_q);
+    $user_info = mysqli_fetch_assoc($results);
+    $user_id = $user_info["id"];
+    $is_admin = $user_info["is_admin"];
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -16,6 +22,7 @@
           <li><a href="index.php">Home</a></li>
           <li class="active">Songs</li>
         </ol>
+        <?php if (strcmp ($is_admin, "1") == 0) { ?>
         <h3>Create New Song</h3>
         <div class="col-lg-12 well well-sm">
                 <div class="row">
@@ -62,6 +69,7 @@
                     </form>
             </div>
         </div>
+        <?php } ?>
         <h3>All Songs</h3>
         <table class="table table-striped">
             <thead>

@@ -1,3 +1,14 @@
+<?php
+    $is_admin = "";
+    if (isset($_SESSION['username'])) {
+        include_once 'connection.php';
+        $user_q = "SELECT id, is_admin FROM `music`.`web_user` where `username`='".$_SESSION['username']."'";
+        $results = mysqli_query($conn,$user_q);
+        $user_info = mysqli_fetch_assoc($results);
+        $user_id = $user_info["id"];
+        $is_admin = $user_info["is_admin"];
+    }
+?>
 <div class="navbar-wrapper">
   <div class="container">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -18,6 +29,13 @@
             </ul>
             <div class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <?php
+                            if (strcmp ($is_admin, "1") == 0) {
+                                echo "<a href='userManagement.php'>Manage Users   <span class='glyphicon glyphicon-user'></span></a>";
+                            }
+                        ?>
+                    </li>
                     <li>
                         <?php
                             if (isset($_SESSION['username'])) {

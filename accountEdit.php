@@ -5,7 +5,6 @@
     include_once 'connection.php';
     $email_q = "SELECT email FROM `music`.`web_user` where `username`='".$_SESSION['username']."'";
     $stored_email = mysqli_query($conn,$email_q)->fetch_row()[0];;
-    mysqli_close($conn);
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -66,6 +65,8 @@
                 </div>
             </div>
         </div>
-        <?php include 'footer.php'; ?>
+        <?php include 'footer.php'; 
+            mysqli_close($conn);
+        ?>
     </body>
 </html>
