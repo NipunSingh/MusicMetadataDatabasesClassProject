@@ -12,7 +12,7 @@ include_once 'connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = mysql_real_escape_string($_POST['vals']);
     $p_id = mysql_real_escape_string($_POST['playlist']);
-    $select_q = "SELECT `music`.`song`.id as id, `music`.`song`.name as name, `music`.`artist`.name as artist_name FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`song`.artist_id = `music`.`artist`.id WHERE `music`.`song`.name LIKE '".$query."%'";
+    $select_q = "SELECT `music`.`song`.id as id, `music`.`song`.name as name, `music`.`artist`.name as artist_name FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`song`.artist_id = `music`.`artist`.id WHERE `music`.`song`.name LIKE '%".$query."%'";
     $songs = $conn->query($select_q);
     $result = "";
     if ($songs->num_rows > 0 && strcmp("", $query) != 0) {
