@@ -14,6 +14,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="playlists.php">Playlists</a></li>
+                <li><a href="songs.php">Songs</a></li>
             </ul>
             <div class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav">

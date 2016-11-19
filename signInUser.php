@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: signin.php");
     } else {
         $password_q = "SELECT password FROM `music`.`web_user` where `username`='".$username."'";
-        $stored_password = mysqli_query($conn,$password_q)->fetch_row()[0];;
+        $stored_password = mysqli_query($conn,$password_q)->fetch_row()[0];
         mysqli_close($conn);
         if (strcmp ($stored_password, $password) == 0) {
             $_SESSION['username'] = $_POST['username'];
