@@ -12,16 +12,20 @@
     </head>
     <body>
         <?php include 'navbar.php'; ?>
+        <ol class="breadcrumb">
+          <li><a href="index.php">Home</a></li>
+          <li class="active">Playlists</li>
+        </ol>
         <h3>Create New Playlist</h3>
         <div class="col-lg-12 well well-sm">
                 <div class="row">
                     <form id = "main-form" class="form-inline" action="createPlaylist.php" method="post">
                         <div class="col-sm-4 form-group">
-                            <label>Name</label>
+                            <label>Name:</label>
                             <input type="text" name='name' id='name' placeholder="Name" class="form-control" required>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <label>Description</label>
+                            <label>Description:</label>
                             <input type="text" name='description' id='description' placeholder="Description" class="form-control" required>
                         </div>
                         <div class="col-sm-2 form-group">
@@ -48,7 +52,7 @@
                     if ($playlists->num_rows > 0) {
                         while($row = $playlists->fetch_assoc()) {
                             echo "<tr><td>";
-                            echo $row["name"]."</td><td>".$row["description"]."</td><td><a href='viewPlaylist.php?p_id=".$row["id"]."'>View Playlist</a>";
+                            echo "<a href='viewPlaylist.php?p_id=".$row["id"]."' title='View Playlist'>".$row["name"]."</a></td><td>".$row["description"]."</td><td><a href='viewPlaylist.php?p_id=".$row["id"]."' title='View Playlist'><span class='glyphicon glyphicon-search'></span></a>  <a href='editPlaylist.php?p_id=".$row["id"]."' title='Edit'><span class='glyphicon glyphicon-pencil'></span></a>  <a href='deletePlaylist.php?p_id=".$row["id"]."' title='Delete'><span class='glyphicon glyphicon-remove'></span></a>";
                             echo "</td></tr>";
                         }
                     }

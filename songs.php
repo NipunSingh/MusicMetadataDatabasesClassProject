@@ -12,20 +12,24 @@
     </head>
     <body>
         <?php include 'navbar.php'; ?>
+        <ol class="breadcrumb">
+          <li><a href="index.php">Home</a></li>
+          <li class="active">Songs</li>
+        </ol>
         <h3>Create New Song</h3>
         <div class="col-lg-12 well well-sm">
                 <div class="row">
                     <form id = "main-form" action="createSong.php" method="post">
                         <div class="col-sm-6 form-group">
-                            <label>Name</label>
+                            <label>Name:</label>
                             <input type="text" name='name' id='name' placeholder="Name" class="form-control" required>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <label>Length</label>
+                            <label>Length:</label>
                             <input type="text" name='length' id='length' placeholder="length" class="form-control" required>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <label>Artist</label>
+                            <label>Artist:</label>
                             <select name="artist">
                                 <?php
                                     $artist_q = "SELECT id, name FROM `music`.`artist`";
@@ -39,7 +43,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <label>Genre</label>
+                            <label>Genre:</label>
                             <select name="genre">
                                 <?php
                                     $genre_q = "SELECT id, name FROM `music`.`genre`";
