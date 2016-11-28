@@ -38,66 +38,38 @@ $user_id = $user_info["id"];
                 <div class="row">
                     <form id = "main-form" action="search.php" method="post">
                         <div class="col-sm-12">
-                            <!-- Form 1 -->
-                            <div class="form-group">
-                                <div class="col-sm-4 form-group">
-                                    <label>Field 1</label>
-                                    <select form="main-form" class='form-control' id="field-1" name="field-1" required>
-                                        <option value="nothing">Please Select</option>
-                                        <option value="`music`.`artist`.name">Artist Name</option>
-                                        <!--<option value="`music`.`artist`.popularity">Artist Popularity</option>
-                                        <option value="`music`.`artist`.followers">Artist Followers</option>-->
-                                        <option value="`music`.`song`.name">Song Name</option>
-                                        <option value="`music`.`song`.popularity">Song Popularity</option>
-                                        <option value="`music`.`song`.length">Song Length</option>
-                                    </select>
+                            <?php for ($i = 1; $i <= 2; $i++) { ?>
+                                <div class="form-group">
+                                    <div class="col-sm-4 form-group">
+                                        <label>Field <?php echo $i; ?></label>
+                                        <select form="main-form" class='form-control' id="field-<?php echo $i; ?>" name="field-<?php echo $i; ?>" required>
+                                            <option value="nothing">Please Select</option>
+                                            <option value="`music`.`artist`.name">Artist Name</option>
+                                            <!--<option value="`music`.`artist`.popularity">Artist Popularity</option>
+                                            <option value="`music`.`artist`.followers">Artist Followers</option>-->
+                                            <option value="`music`.`song`.name">Song Name</option>
+                                            <option value="`music`.`song`.popularity">Song Popularity</option>
+                                            <option value="`music`.`song`.length">Song Length</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Operator <?php echo $i; ?></label>
+                                        <select form="main-form" class='form-control' id="operator-<?php echo $i; ?>" name="operator-<?php echo $i; ?>" required>
+                                            <option value="=">=</option>
+                                            <option value="!=">!=</option>
+                                            <option value="<"><</option>
+                                            <option value="<="><=</option>
+                                            <option value=">">></option>
+                                            <option value=">=">>=</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Value <?php echo $i; ?></label>
+                                        <input type="text" name = "value-<?php echo $i; ?>" id = "value-<?php echo $i; ?>" placeholder="Value" class="form-control">
+                                    </div>
                                 </div>
-                                <div class="col-sm-4 form-group">
-                                    <label>Operator 1</label>
-                                    <select form="main-form" class='form-control' id="operator-1" name="operator-1" required>
-                                        <option value="=">=</option>
-                                        <option value="!=">!=</option>
-                                        <option value="<"><</option>
-                                        <option value="<="><=</option>
-                                        <option value=">">></option>
-                                        <option value=">=">>=</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4 form-group">
-                                    <label>Value 1</label>
-                                    <input type="text" name = "value-1" id = "value-1" placeholder="Value" class="form-control" required>
-                                </div>
-                            </div>
-                            <!-- Form 2 -->
-                            <div class="form-group">
-                                <div class="col-sm-4 form-group">
-                                    <label>Field 2</label>
-                                    <select form="main-form" class='form-control' id="field-2" name="field-2" required>
-                                        <option value="nothing">Please Select</option>
-                                        <option value="`music`.`artist`.name">Artist Name</option>
-                                        <!--<option value="`music`.`artist`.popularity">Artist Popularity</option>
-                                        <option value="`music`.`artist`.followers">Artist Followers</option>-->
-                                        <option value="`music`.`song`.name">Song Name</option>
-                                        <option value="`music`.`song`.popularity">Song Popularity</option>
-                                        <option value="`music`.`song`.length">Song Length</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4 form-group">
-                                    <label>Operator 2</label>
-                                    <select form="main-form" class='form-control' id="operator-2" name="operator-2" required>
-                                        <option value="=">=</option>
-                                        <option value="!=">!=</option>
-                                        <option value="<"><</option>
-                                        <option value="<="><=</option>
-                                        <option value=">">></option>
-                                        <option value=">=">>=</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4 form-group">
-                                    <label>Value 2</label>
-                                    <input type="text" name = "value-2" id = "value-2" placeholder="Value" class="form-control">
-                                </div>
-                            </div>
+                            <?php } ?>
+                            
                             <button type="submit" class="btn btn-lg btn-info">Search</button>
                         </div>
                     </form> 
@@ -116,7 +88,7 @@ $user_id = $user_info["id"];
             
             //Referenced http://stackoverflow.com/questions/15794179/create-a-dynamic-mysql-query-using-php-variables
             
-            if (strcmp($field_1, "nothing") == 0) {
+            if (strcmp($field_1, "nothing") == 0 || strcmp($value_1, "") == 0) {
                 $_SESSION['error'] = "INVALID";
                 header("Location: search.php");
             } else {
