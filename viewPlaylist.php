@@ -59,20 +59,20 @@
                 <tr>
                     <th>Name</th>
                     <th>Artist</th>
-                    <th>Genre</th>
                     <th>Length</th>
                     <th>Options</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    $songs_q = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`artist`.name as artist_name, `music`.`genre`.name as genre_name, `music`.`song`.length FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id LEFT JOIN `music`.`genre` ON `music`.`genre`.id = `music`.`song`.genre_id WHERE `music`.`song`.id IN (SELECT song_id as id FROM `music`.`playlist_song` WHERE `playlist_id`='".$playlist_id."')";
+                    //$songs_q = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`artist`.name as artist_name, `music`.`genre`.name as genre_name, `music`.`song`.length FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id LEFT JOIN `music`.`genre` ON `music`.`genre`.id = `music`.`song`.genre_id WHERE `music`.`song`.id IN (SELECT song_id as id FROM `music`.`playlist_song` WHERE `playlist_id`='".$playlist_id."')";
+                    $songs_q = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`artist`.name as artist_name, `music`.`song`.length FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id WHERE `music`.`song`.id IN (SELECT song_id as id FROM `music`.`playlist_song` WHERE `playlist_id`='".$playlist_id."')";
                     //$songs_q = "SELECT song_id FROM `music`.`playlist_song` WHERE `playlist_id`='".$playlist_id."'";
                     $songs = $conn->query($songs_q);
                     if ($songs->num_rows > 0) {
                         while($row = $songs->fetch_assoc()) {
                             echo "<tr><td>";
-                            echo $row["name"]."</td><td>".$row["artist_name"]."</td><td>".$row["genre_name"]."</td><td>".$row["length"]."<td><a href='removeSongPlaylist.php?p_id=".$playlist_id."&s_id=".$row["id"]."' title='Remove from Playlist'><span class='glyphicon glyphicon-remove'></span></a>";
+                            echo $row["name"]."</td><td>".$row["artist_name"]."</td><td>".$row["length"]."<td><a href='removeSongPlaylist.php?p_id=".$playlist_id."&s_id=".$row["id"]."' title='Remove from Playlist'><span class='glyphicon glyphicon-remove'></span></a>";
                             echo "</td></tr>";
                         }
                     }

@@ -27,17 +27,13 @@
         <div class="col-lg-12 well well-sm">
                 <div class="row">
                     <form id = "main-form" action="createArtist.php" method="post">
-                        <div class="col-sm-4 form-group">
+                        <div class="col-sm-6 form-group">
                             <label>Name:</label>
                             <input type="text" name='name' id='name' placeholder="Name" class="form-control" required>
                         </div>
-                        <div class="col-sm-4 form-group">
-                            <label>Birth Date:</label>
-                            <input type="text" name='birth' id='birth' placeholder="YYYY-MM-DD" class="form-control">
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <label>Death Date:</label>
-                            <input type="text" name='death' id='death' placeholder="YYYY-MM-DD" class="form-control">
+                        <div class="col-sm-6 form-group">
+                            <label>Popularity:</label>
+                            <input type="text" name='popularity' id='popularity' class="form-control">
                         </div>
                         <div class="col-sm-2 form-group">
                             <button type="submit" class="btn btn-md btn-info">Create</button>
@@ -51,8 +47,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Birth Date</th>
-                    <th>Death Date</th>
+                    <th>Popularity</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,15 +59,15 @@
                     if ($artists->num_rows > 0) {
                         while($row = $artists->fetch_assoc()) {
                             echo "<tr><td>";
-                            $bdate = $row["birth_date"];
-                            if (strcmp($row["birth_date"],"0000-00-00")==0) {
-                                $bdate = "-";
-                            }
-                            $ddate = $row["death_date"];
-                            if (strcmp($row["death_date"],"0000-00-00")==0) {
-                                $ddate = "-";
-                            }
-                            echo $row["name"]."</td><td>".$bdate."</td><td>".$ddate;
+//                            $bdate = $row["birth_date"];
+//                            if (strcmp($row["birth_date"],"0000-00-00")==0) {
+//                                $bdate = "-";
+//                            }
+//                            $ddate = $row["death_date"];
+//                            if (strcmp($row["death_date"],"0000-00-00")==0) {
+//                                $ddate = "-";
+//                            }
+                            echo $row["name"]."</td><td>".$row["popularity"];
                             echo "</td></tr>";
                         }
                     }
