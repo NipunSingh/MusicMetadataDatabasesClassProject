@@ -27,6 +27,7 @@
                 <li><a href="playlists.php">Playlists</a></li>
                 <li><a href="songs.php">Songs</a></li>
                 <li><a href="artists.php">Artists</a></li>
+                <li><a href="search.php">Search</a></li>
             </ul>
             <div class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav">
