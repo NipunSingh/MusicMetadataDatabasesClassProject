@@ -38,7 +38,7 @@ $user_id = $user_info["id"];
                 <div class="row">
                     <form id = "main-form" action="search.php" method="post">
                         <div class="col-sm-12">
-                            <?php for ($i = 1; $i <= 2; $i++) { ?>
+                            <?php for ($i = 1; $i <= 3; $i++) { ?>
                                 <div class="form-group">
                                     <div class="col-sm-4 form-group">
                                         <label>Field <?php echo $i; ?></label>
@@ -61,6 +61,7 @@ $user_id = $user_info["id"];
                                             <option value="<="><=</option>
                                             <option value=">">></option>
                                             <option value=">=">>=</option>
+                                            <option value="LIKE">LIKE</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-4 form-group">
@@ -86,6 +87,10 @@ $user_id = $user_info["id"];
             $operator_2 = mysql_real_escape_string($_POST['operator-2']);
             $value_2 = mysql_real_escape_string($_POST['value-2']);
             
+            $field_3 = mysql_real_escape_string($_POST['field-3']);
+            $operator_3 = mysql_real_escape_string($_POST['operator-3']);
+            $value_3 = mysql_real_escape_string($_POST['value-3']);
+            
             //Referenced http://stackoverflow.com/questions/15794179/create-a-dynamic-mysql-query-using-php-variables
             
             if (strcmp($field_1, "nothing") == 0 || strcmp($value_1, "") == 0) {
@@ -95,11 +100,24 @@ $user_id = $user_info["id"];
                 unset($sql);
                 
                 if ($field_1 && $value_1) {
+                    if (strcmp($operator_1, "LIKE") == 0) {
+                        $value_1 = "%".$value_1."%";
+                    }
                     $sql[] = " ".$field_1." ".$operator_1." '$value_1' ";
                 }
                 
                 if ($field_2 && $value_2  && strcmp($field_2, "nothing") != 0) {
+                    if (strcmp($operator_2, "LIKE") == 0) {
+                        $value_2 = "%".$value_2."%";
+                    }
                     $sql[] = " ".$field_2." ".$operator_2." '$value_2' ";
+                }
+                
+                if ($field_3 && $value_3  && strcmp($field_3, "nothing") != 0) {
+                    if (strcmp($operator_3, "LIKE") == 0) {
+                        $value_3 = "%".$value_3."%";
+                    }
+                    $sql[] = " ".$field_3." ".$operator_3." '$value_3' ";
                 }
                 
                 //$query = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`song`.popularity as song_popularity, `music`.`song`.length, `music`.`artist`.name as artist_name, `music`.`artist`.popularity as artist_popularity, `music`.`artist`.followers as artist_followers FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id";
