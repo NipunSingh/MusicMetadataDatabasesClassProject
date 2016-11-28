@@ -45,8 +45,8 @@ $user_id = $user_info["id"];
                                         <select form="main-form" class='form-control' id="field-<?php echo $i; ?>" name="field-<?php echo $i; ?>" required>
                                             <option value="nothing">Please Select</option>
                                             <option value="`music`.`artist`.name">Artist Name</option>
-                                            <!--<option value="`music`.`artist`.popularity">Artist Popularity</option>
-                                            <option value="`music`.`artist`.followers">Artist Followers</option>-->
+                                            <option value="`music`.`artist`.popularity">Artist Popularity</option>
+                                            <!--<option value="`music`.`artist`.followers">Artist Followers</option>-->
                                             <option value="`music`.`song`.name">Song Name</option>
                                             <option value="`music`.`song`.popularity">Song Popularity</option>
                                             <option value="`music`.`song`.length">Song Length</option>
@@ -122,7 +122,7 @@ $user_id = $user_info["id"];
                 
                 //$query = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`song`.popularity as song_popularity, `music`.`song`.length, `music`.`artist`.name as artist_name, `music`.`artist`.popularity as artist_popularity, `music`.`artist`.followers as artist_followers FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id";
                 
-                $query = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`song`.length, `music`.`song`.popularity as song_popularity, `music`.`artist`.name as artist_name FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id";
+                $query = "SELECT `music`.`song`.id, `music`.`song`.name, `music`.`song`.length, `music`.`song`.popularity as song_popularity, `music`.`artist`.name as artist_name, `music`.`artist`.popularity as artist_popularity FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id";
 
 
                 if (!empty($sql)) {
@@ -139,13 +139,14 @@ $user_id = $user_info["id"];
                                 <th>Artist Name</th>
                                 <th>Song Length</th>
                                 <th>Song Popularity</th>
+                                <th>Artist Popularity</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             while($row = $results->fetch_assoc()) {
                                 echo "<tr><td>";
-                                echo $row["name"]."</td><td>".$row["artist_name"]."</td><td>".$row["length"]."</td><td>".$row["song_popularity"];
+                                echo $row["name"]."</td><td>".$row["artist_name"]."</td><td>".$row["length"]."</td><td>".$row["song_popularity"]."</td><td>".$row["artist_popularity"];
                                 echo "</td></tr>";
                             }
                             ?>
