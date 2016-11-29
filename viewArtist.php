@@ -15,6 +15,7 @@
     <head>
         <?php include 'header.php'; ?>
         <title>Songs</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
         <?php include 'navbar.php'; ?>
@@ -44,6 +45,37 @@
                             }
                         ?>
                         </ul>
+                    </div>
+                    <h3> Spotify Followers Graph </h3>
+                    <div class="panel-body">
+                          <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+                            <script>
+                                var data = [
+                                {
+                                    //x: ['2013-10-04 22:23:00', '2013-10-04 23:23:00', '2013-10-05 02:23:00'],
+                                    //y: [173000, 335000, 400000],
+                                    <?php 
+                                                    $artist_data_q = "SELECT `music`.`artist_data`.followers, `music`.`artist_data`.timestamp FROM `music`.`artist_data` WHERE `music`.`artist_data`.artist_id = '".$artist_id."'";
+                $artist_data_results = $conn->query($artist_data_q);
+                $followers_string = "";
+                $date_string = "";
+                if ($artist_data_results->num_rows > 0) {
+                                while($data_row = $artist_data_results->fetch_assoc()) {
+                                    //echo "<li>".$data_row["followers"]."</li>";
+                                    $followers_string = $followers_string.$data_row["followers"].",";
+                                    $date_string = $date_string."'".$data_row["timestamp"]."',";
+                                }
+                                $trimmed_followers = trim($followers_string, ",");
+                                $trimmed_dates = trim($date_string, ",");
+                                echo "x: [".$trimmed_dates."],";
+                                echo "y: [".$trimmed_followers."],";
+
+                            }
+                                ?>
+                                    type: 'scatter',
+                                }];
+                                Plotly.newPlot('myDiv', data);
+                            </script>
                     </div>
                 </div>
             <?php
