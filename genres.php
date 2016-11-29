@@ -38,16 +38,16 @@
                     $user_id = mysqli_query($conn,$user_q)->fetch_row()[0];
                     //$songs_q = "SELECT `music`.`song`.name, `music`.`artist`.name as artist_name, `music`.`genre`.name as genre_name, `music`.`song`.length, `music`.`song`.popularity FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id LEFT JOIN `music`.`genre` ON `music`.`genre`.id = `music`.`song`.genre_id ORDER BY `music`.`song`.popularity DESC";
                     $songs_q = "SELECT `music`.`song`.name, `music`.`artist`.name as artist_name, `music`.`song`.length, `music`.`song`.popularity FROM `music`.`song` LEFT JOIN `music`.`artist` ON `music`.`artist`.id = `music`.`song`.artist_id ORDER BY `music`.`song`.popularity DESC";
-                    $genres_q = "SELECT `music`.`genre`.name, `music`.`genre`.id FROM `music`.`genre` ORDER BY `music`.`genre`.name DESC";
+                    $genres_q = "SELECT `music`.`genre`.name, `music`.`genre`.id FROM `music`.`genre` ORDER BY `music`.`genre`.name ASC";
                     $genres = $conn->query($genres_q);
                     if ($genres->num_rows > 0) {
                         while($row = $genres->fetch_assoc()) {
                             echo "<tr><td>";
-                            echo $row["name"]."</td><td>".$row["id"];
-                            $artists_in_genre_q = "SELECT `music`.`artist`.name FROM `music`.`artist` LEFT JOIN `music`.`artist_in_genre` ON `music`.`artist`.id = `music`.`artist_in_genre`.artist_id WHERE `music`.`artist_in_genre`.genre_id = ".$row["id"];
+                            echo $row["name"]."</td><td>";
+                            $artists_in_genre_q = "SELECT `music`.`artist`.name FROM `music`.`artist` LEFT JOIN `music`.`artist_in_genre` ON `music`.`artist`.id = `music`.`artist_in_genre`.artist_id WHERE `music`.`artist_in_genre`.genre_id = ".$row["id"]." ORDER BY `music`.`artist`.name ASC";
                             $artists = $conn->query($artists_in_genre_q);
                             while($inner_row = $artists->fetch_assoc()) {
-                                echo $inner_row["name"];
+                                echo "<li>".$inner_row["name"]."</li>";
                             }
 
                             echo "</td></tr>";
