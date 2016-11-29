@@ -21,7 +21,7 @@
         <?php include 'navbar.php'; ?>
         <ol class="breadcrumb">
           <li><a href="index.php">Home</a></li>
-          <li class="active">Songs</li>
+          <li class="active">Artists</li>
         </ol>
         <?php
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
