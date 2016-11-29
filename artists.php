@@ -54,7 +54,7 @@
                 <?php
                     $user_q = "SELECT id FROM `music`.`web_user` where `username`='".$_SESSION['username']."'";
                     $user_id = mysqli_query($conn,$user_q)->fetch_row()[0];
-                    $artists_q = "SELECT * FROM `music`.`artist`";
+                    $artists_q = "SELECT * FROM `music`.`artist` ORDER BY `music`.`artist`.popularity DESC";
                     $artists = $conn->query($artists_q);
                     if ($artists->num_rows > 0) {
                         while($row = $artists->fetch_assoc()) {
