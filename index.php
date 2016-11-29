@@ -54,7 +54,7 @@
                         if ($artists->num_rows > 0) {
                             while($row = $artists->fetch_assoc()) {
                                 echo "<tr><td>";
-                                echo $row["name"]."</td><td>".$row["time"]."</td><td><a href='removeArtistFavorite.php?u_id=".$user_id."&a_id=".$row["id"]."'><span class='glyphicon glyphicon-remove'></span></a>";
+                                echo "<a href='viewArtist.php?a_id=".$row["id"]."'>".$row["name"]."</a></td><td>".$row["time"]."</td><td><a href='removeArtistFavorite.php?u_id=".$user_id."&a_id=".$row["id"]."'><span class='glyphicon glyphicon-remove'></span></a>";
                                 echo "</td></tr>";
                             }
                         }

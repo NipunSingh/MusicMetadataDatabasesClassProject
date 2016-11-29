@@ -67,7 +67,7 @@
 //                            if (strcmp($row["death_date"],"0000-00-00")==0) {
 //                                $ddate = "-";
 //                            }
-                            echo $row["name"]."</td><td>".$row["popularity"];
+                            echo "<a href='viewArtist.php?a_id=".$row["id"]."'>".$row["name"]."</a></td><td>".$row["popularity"];
                             echo "</td></tr>";
                         }
                     }
