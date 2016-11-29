@@ -45,9 +45,7 @@
                             }
                         ?>
                         </ul>
-                    </div>
-                    <h3> Spotify Followers Graph </h3>
-                    <div class="panel-body">
+
                           <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
                             <script>
                                 var data = [
@@ -74,7 +72,26 @@
                                 ?>
                                     type: 'scatter',
                                 }];
-                                Plotly.newPlot('myDiv', data);
+                                var layout = {
+                                              title: 'Spotify Followers Graph',
+                                              xaxis: {
+                                                title: 'Dates',
+                                                titlefont: {
+                                                  family: 'Courier New, monospace',
+                                                  size: 18,
+                                                  color: '#7f7f7f'
+                                                }
+                                              },
+                                              yaxis: {
+                                                title: 'Follower Count',
+                                                titlefont: {
+                                                  family: 'Courier New, monospace',
+                                                  size: 18,
+                                                  color: '#7f7f7f'
+                                                }
+                                              }
+                                            };
+                                Plotly.newPlot('myDiv', data, layout);
                             </script>
                     </div>
                 </div>
